@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 	
@@ -14,7 +13,7 @@ pipeline {
       stage('checkout') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/Ajaygit0987/Docker-CI-CD.git'
+                git branch: 'master', url: 'https://github.com/Ajaygit0987/new-demo.git'
              
           }
         }
@@ -58,7 +57,7 @@ stage ('upload war file to nexus'){
               
                 sh 'docker build -t samplewebapp:latest .' 
                 sh 'docker tag samplewebapp:latest ajaydocker0987/samplewebapp:latest'
-                //sh 'docker tag samplewebapp kempegowda/samplewebapp:$BUILD_NUMBER'
+                //sh 'docker tag samplewebapp ajaydocker0987/samplewebapp:$BUILD_NUMBER'
                
           }
         }
@@ -67,7 +66,7 @@ stage ('upload war file to nexus'){
      steps{  
          script {
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin acct_id.dkr.ecr.us-east-2.amazonaws.com'
-                sh 'docker push acct_id.dkr.ecr.us-east-2.amazonaws.com/your_ecr_repo:latest'
+                sh 'docker push acct_id.dkr.ecr.us-east-2.amazonaws.com/samplewebapp:latest'
          }
         }
       }
@@ -104,4 +103,4 @@ stage ('upload war file to nexus'){
  
     }
 }
-  
+ 
